@@ -1,0 +1,27 @@
+{
+  "name": "user-svc",
+  "version": "0.0.1",
+  "description": "User management service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hharnisc/user-svc.git"
+  },
+  "keywords": [
+    "grpc",
+    "user",
+    "service"
+  ],
+  "author": "hharnisc@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hharnisc/user-svc/issues"
+  },
+  "homepage": "https://github.com/hharnisc/user-svc#readme",
+  "dependencies": {
+    "grpc": "^1.2.0"
+  }
+}
