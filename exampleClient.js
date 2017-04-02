@@ -1,4 +1,5 @@
 const grpc = require('grpc');
+
 const proto = grpc.load('./user.proto');
 
 const client = new proto.user.User('localhost:50051', grpc.credentials.createInsecure());
@@ -13,6 +14,6 @@ client.create(
     roles: ['read', 'write'],
   },
   (err, response) => {
-    console.log('response', response);
-  }
+    console.log('response', response); // eslint-disable-line no-console
+  },
 );
