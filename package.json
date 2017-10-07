@@ -4,7 +4,8 @@
   "description": "User management service",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "micro",
+    "dev": "micro-dev",
     "test": "xo"
   },
   "xo": {
@@ -25,8 +26,12 @@
     "url": "https://github.com/hharnisc/user-svc/issues"
   },
   "homepage": "https://github.com/hharnisc/user-svc#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@hharnisc/micro-rpc": "0.1.0",
+    "micro": "9.0.0"
+  },
   "devDependencies": {
+    "micro-dev": "1.2.3",
     "xo": "^0.18.2"
   }
 }
