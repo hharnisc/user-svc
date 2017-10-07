@@ -1,0 +1,11 @@
+FROM node:8.6.0-slim
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+ENV NODE_ENV development
+RUN npm install -g micro-dev
+
+EXPOSE 80
+
+CMD micro-dev -p 80
