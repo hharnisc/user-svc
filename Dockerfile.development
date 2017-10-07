@@ -4,8 +4,10 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 ENV NODE_ENV development
-RUN npm install -g micro-dev
+ENV PORT 80
+
+RUN npm install -g nodemon
 
 EXPOSE 80
 
-CMD micro-dev -p 80
+CMD nodemon
