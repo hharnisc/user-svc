@@ -4,7 +4,12 @@
   "description": "User management service",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "test": "xo"
+  },
+  "xo": {
+    "space": true,
+    "semicolon": false
   },
   "repository": {
     "type": "git",
@@ -20,5 +25,8 @@
     "url": "https://github.com/hharnisc/user-svc/issues"
   },
   "homepage": "https://github.com/hharnisc/user-svc#readme",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "xo": "^0.18.2"
+  }
 }

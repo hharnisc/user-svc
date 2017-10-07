@@ -1,2 +1,1 @@
-require('babel-register');
-require('./src/server');
+console.log('hello')
