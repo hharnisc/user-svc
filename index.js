@@ -18,7 +18,7 @@ const main = async () => {
     process.env.MONGO_DB,
     rpc(
       method('create', () => 'create'),
-      method('get', ({db}) => db.find().toArray()),
+      method('get', (_, {db}) => db.find().toArray()),
       method('update', () => 'update'),
       method('delete', () => 'delete'),
       method('verify', () => 'verify'),
