@@ -1,2 +1,3 @@
 # user-svc
-A service for managing users over gRPC
+
+A service for managing users
