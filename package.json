@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "xo"
+    "test": "xo && jest"
   },
   "xo": {
     "space": true,
-    "semicolon": false
+    "semicolon": false,
+    "envs": [
+      "node",
+      "jasmine"
+    ]
   },
   "repository": {
     "type": "git",
