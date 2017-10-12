@@ -2,8 +2,26 @@ const micro = require('micro')
 const {MongoClient} = require('mongodb')
 const {
  rpc,
- method
+ method,
+ createError
 } = require('@hharnisc/micro-rpc')
+
+const create = async ({
+  email
+}, {
+  db
+}) => {
+  if (!email) {
+    throw createError({message: 'Missing Input Parameter'})
+  }
+  const result = await db.insertOne({
+    email,
+    verified: false
+  })
+  return {
+    id: result.insertedId
+  }
+}
 
 const connectDBMiddleware = async (uri, next) => {
   const db = await MongoClient.connect(uri)
@@ -17,7 +35,7 @@ const main = async () => {
   const handler = await connectDBMiddleware(
     process.env.MONGO_DB,
     rpc(
-      method('create', () => 'create'),
+      method('create', create),
       method('get', (_, {db}) => db.find().toArray()),
       method('update', () => 'update'),
       method('delete', () => 'delete'),
