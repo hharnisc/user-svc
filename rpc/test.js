@@ -13,9 +13,27 @@ describe('rpc', () => {
     service.close()
   })
 
-  it('should have all endpoints', async () => {
+  it('should have all rpc endpoints', async () => {
     const url = await listen(service)
-    const body = await request(url)
-    console.log(body)
+    const body = await request({
+      method: 'POST',
+      uri: url,
+      body: {
+        name: 'methods'
+      },
+      json: true
+    })
+    expect(body)
+      .toEqual({
+        result:
+        [
+          {name: 'create'},
+          {name: 'get'},
+          {name: 'update'},
+          {name: 'delete'},
+          {name: 'verify'},
+          {name: 'methods', docs: 'list all available methods'}
+        ]
+      })
   })
 })

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "xo && jest"
+    "test": "xo && jest",
+    "test-watch": "jest --watch"
   },
   "xo": {
     "space": true,
