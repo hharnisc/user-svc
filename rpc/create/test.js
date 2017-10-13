@@ -1,0 +1,19 @@
+const create = require('./index')
+
+describe('rpc/create', () => {
+  it('should create a new user', async () => {
+    const email = 'test@test.com'
+    const id = '12345'
+    const insertResult = {
+      insertedId: id
+    }
+    const db = {
+      insertOne: jest.fn(() => Promise.resolve(insertResult))
+    }
+    const result = await create({email}, {db})
+    expect(result)
+      .toEqual({
+        id
+      })
+  })
+})
