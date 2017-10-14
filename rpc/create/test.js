@@ -22,7 +22,7 @@ describe('rpc/create', () => {
       })
   })
 
-  it('show throw an error if email is missing', async () => {
+  it('should throw an error if email is missing', async () => {
     try {
       await create({}, {})
     } catch (err) {
