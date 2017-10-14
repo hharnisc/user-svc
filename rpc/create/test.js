@@ -28,6 +28,8 @@ describe('rpc/create', () => {
     } catch (err) {
       expect(err.message)
         .toBe('Missing Input Parameter')
+      expect(err.handled)
+        .toBe(true)
     }
   })
 })
