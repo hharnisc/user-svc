@@ -32,4 +32,23 @@ describe('rpc/create', () => {
         .toBe(true)
     }
   })
+  it('should throw an error if email is invalid', async () => {
+    const email = 'email'
+    const id = '12345'
+    const insertResult = {
+      insertedId: id
+    }
+    const db = {
+      insertOne: jest.fn(() => Promise.resolve(insertResult))
+    }
+    try {
+      await create({email}, {db})
+      throw new Error('This Should Fail')
+    } catch (err) {
+      expect(err.message)
+        .toBe('Invalid Input: email')
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
 })
