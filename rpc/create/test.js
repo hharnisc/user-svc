@@ -21,4 +21,13 @@ describe('rpc/create', () => {
         id
       })
   })
+
+  it('show throw an error if email is missing', async () => {
+    try {
+      await create({}, {})
+    } catch (err) {
+      expect(err.message)
+        .toBe('Missing Input Parameter')
+    }
+  })
 })
