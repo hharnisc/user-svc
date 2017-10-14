@@ -11,6 +11,11 @@ describe('rpc/create', () => {
       insertOne: jest.fn(() => Promise.resolve(insertResult))
     }
     const result = await create({email}, {db})
+    expect(db.insertOne)
+      .toBeCalledWith({
+        email,
+        verified: false
+      })
     expect(result)
       .toEqual({
         id

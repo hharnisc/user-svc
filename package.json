@@ -13,7 +13,7 @@
     "semicolon": false,
     "envs": [
       "node",
-      "jasmine"
+      "jest"
     ]
   },
   "repository": {
