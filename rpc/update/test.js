@@ -76,4 +76,28 @@ describe('rpc/update', () => {
         .toBe(true)
     }
   })
+
+  it('should update and remove data from an existing user', async () => {
+    const email = 'test@test.com'
+    const dataId = '1234'
+    const expectedResult = {
+      matchedCount: 1
+    }
+    const db = {
+      updateOne: jest.fn(() => Promise.resolve(expectedResult))
+    }
+    const result = await update({email, dataId}, {db})
+    expect(db.updateOne)
+      .toBeCalledWith({
+        email
+      }, {
+        $unset: {
+          [`data.${dataId}`]: ''
+        }
+      })
+    expect(result)
+      .toEqual({
+        updated: true
+      })
+  })
 })
