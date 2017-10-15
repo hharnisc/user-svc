@@ -47,4 +47,27 @@ describe('rpc/verify', () => {
         .toBe(true)
     }
   })
+
+  it('should not verify a user who does not exist', async () => {
+    const email = 'test@test.com'
+    const expectedResult = {
+      matchedCount: 0
+    }
+    const db = {
+      updateOne: jest.fn(() => Promise.resolve(expectedResult))
+    }
+    const result = await verify({email}, {db})
+    expect(db.updateOne)
+      .toBeCalledWith({
+        email
+      }, {
+        $set: {
+          verified: true
+        }
+      })
+    expect(result)
+      .toEqual({
+        verified: false
+      })
+  })
 })
