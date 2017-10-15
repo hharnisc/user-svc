@@ -32,6 +32,7 @@ describe('rpc/create', () => {
         .toBe(true)
     }
   })
+
   it('should throw an error if email is invalid', async () => {
     const email = 'email'
     const id = '12345'
@@ -51,6 +52,7 @@ describe('rpc/create', () => {
         .toBe(true)
     }
   })
+
   it('should throw an error if the email address already exists', async () => {
     const email = 'test@gmail.com'
     const errorMessage = 'Email Address Already Exists'
