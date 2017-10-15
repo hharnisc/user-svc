@@ -3,8 +3,8 @@ const {validate} = require('isemail')
 
 module.exports = async ({
   email,
-  dataId,
-  data
+  appId,
+  appData
 }, {
   db
 }) => {
@@ -14,18 +14,18 @@ module.exports = async ({
   if (!validate(email)) {
     throw createError({message: 'Invalid Input: email'})
   }
-  if (!dataId || typeof dataId !== 'string') {
-    throw createError({message: 'Invalid Input: dataId'})
+  if (!appId || typeof appId !== 'string') {
+    throw createError({message: 'Invalid Input: appId'})
   }
   let update = {
     $set: {
-      [`data.${dataId}`]: data
+      [`data.${appId}`]: appData
     }
   }
-  if (!data) {
+  if (!appData) {
     update = {
       $unset: {
-        [`data.${dataId}`]: ''
+        [`data.${appId}`]: ''
       }
     }
   }

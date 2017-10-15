@@ -3,21 +3,21 @@ const update = require('./index')
 describe('rpc/update', () => {
   it('should update an existing user', async () => {
     const email = 'test@test.com'
-    const dataId = '1234'
-    const data = {test: true}
+    const appId = '1234'
+    const appData = {test: true}
     const expectedResult = {
       matchedCount: 1
     }
     const db = {
       updateOne: jest.fn(() => Promise.resolve(expectedResult))
     }
-    const result = await update({email, dataId, data}, {db})
+    const result = await update({email, appId, appData}, {db})
     expect(db.updateOne)
       .toBeCalledWith({
         email
       }, {
         $set: {
-          [`data.${dataId}`]: data
+          [`data.${appId}`]: appData
         }
       })
     expect(result)
@@ -50,28 +50,28 @@ describe('rpc/update', () => {
     }
   })
 
-  it('should ensure dataId exists', async () => {
+  it('should ensure appId exists', async () => {
     const email = 'test@test.com'
-    const data = {test: true}
+    const appData = {test: true}
     try {
-      await update({email, data}, {})
+      await update({email, appData}, {})
     } catch (err) {
       expect(err.message)
-        .toBe('Invalid Input: dataId')
+        .toBe('Invalid Input: appId')
       expect(err.handled)
         .toBe(true)
     }
   })
 
-  it('should only accept string dataIds', async () => {
+  it('should only accept string appIds', async () => {
     const email = 'test@test.com'
-    const dataId = 1234
-    const data = {test: true}
+    const appId = 1234
+    const appData = {test: true}
     try {
-      await update({email, dataId, data}, {})
+      await update({email, appId, appData}, {})
     } catch (err) {
       expect(err.message)
-        .toBe('Invalid Input: dataId')
+        .toBe('Invalid Input: appId')
       expect(err.handled)
         .toBe(true)
     }
@@ -79,20 +79,20 @@ describe('rpc/update', () => {
 
   it('should update and remove data from an existing user', async () => {
     const email = 'test@test.com'
-    const dataId = '1234'
+    const appId = '1234'
     const expectedResult = {
       matchedCount: 1
     }
     const db = {
       updateOne: jest.fn(() => Promise.resolve(expectedResult))
     }
-    const result = await update({email, dataId}, {db})
+    const result = await update({email, appId}, {db})
     expect(db.updateOne)
       .toBeCalledWith({
         email
       }, {
         $unset: {
-          [`data.${dataId}`]: ''
+          [`data.${appId}`]: ''
         }
       })
     expect(result)
@@ -103,21 +103,21 @@ describe('rpc/update', () => {
 
   it('should not update a user who does not exist', async () => {
     const email = 'test@test.com'
-    const dataId = '1234'
-    const data = {test: true}
+    const appId = '1234'
+    const appData = {test: true}
     const expectedResult = {
       matchedCount: 0
     }
     const db = {
       updateOne: jest.fn(() => Promise.resolve(expectedResult))
     }
-    const result = await update({email, dataId, data}, {db})
+    const result = await update({email, appId, appData}, {db})
     expect(db.updateOne)
       .toBeCalledWith({
         email
       }, {
         $set: {
-          [`data.${dataId}`]: data
+          [`data.${appId}`]: appData
         }
       })
     expect(result)
