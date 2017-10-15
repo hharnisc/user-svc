@@ -4,8 +4,10 @@ const rpc = require('./rpc')
 
 const connectDBMiddleware = async (uri, next) => {
   const db = await MongoClient.connect(uri)
+  const collection = db.collection('users')
+  collection.createIndex({email: 1}, {unique: true})
   return (req, res) => {
-    req.db = db.collection('users')
+    req.db = collection
     return next(req, res)
   }
 }
