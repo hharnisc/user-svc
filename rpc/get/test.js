@@ -19,4 +19,15 @@ describe('rpc/get', () => {
     expect(result)
       .toEqual(expectedResult)
   })
+
+  it('should throw an error if email is missing', async () => {
+    try {
+      await get({}, {})
+    } catch (err) {
+      expect(err.message)
+        .toBe('Missing Input Parameter')
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
 })
