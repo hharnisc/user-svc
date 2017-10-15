@@ -51,4 +51,22 @@ describe('rpc/create', () => {
         .toBe(true)
     }
   })
+  it('should throw an error if the email address already exists', async () => {
+    const email = 'test@gmail.com'
+    const errorMessage = 'Email Address Already Exists'
+    const error = new Error('email')
+    error.code = 11000
+    const db = {
+      insertOne: jest.fn(() => Promise.reject(error))
+    }
+    try {
+      await create({email}, {db})
+      throw new Error('This Should Fail')
+    } catch (err) {
+      expect(err.message)
+        .toBe(errorMessage)
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
 })

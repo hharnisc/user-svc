@@ -12,11 +12,18 @@ module.exports = async ({
   if (!validate(email)) {
     throw createError({message: 'Invalid Input: email'})
   }
-  const result = await db.insertOne({
-    email,
-    verified: false
-  })
-  return {
-    id: result.insertedId
+  try {
+    const result = await db.insertOne({
+      email,
+      verified: false
+    })
+    return {
+      id: result.insertedId
+    }
+  } catch (err) {
+    if (err.code === 11000) {
+      throw createError({message: 'Email Address Already Exists'})
+    }
+    throw err
   }
 }
