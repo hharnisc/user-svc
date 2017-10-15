@@ -15,7 +15,8 @@ module.exports = async ({
   try {
     const result = await db.insertOne({
       email,
-      verified: false
+      verified: false,
+      data: {}
     })
     return {
       id: result.insertedId

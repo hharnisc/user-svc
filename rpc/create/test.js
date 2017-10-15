@@ -14,7 +14,8 @@ describe('rpc/create', () => {
     expect(db.insertOne)
       .toBeCalledWith({
         email,
-        verified: false
+        verified: false,
+        data: {}
       })
     expect(result)
       .toEqual({
