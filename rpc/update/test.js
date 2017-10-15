@@ -49,4 +49,31 @@ describe('rpc/update', () => {
         .toBe(true)
     }
   })
+
+  it('should ensure dataId exists', async () => {
+    const email = 'test@test.com'
+    const data = {test: true}
+    try {
+      await update({email, data}, {})
+    } catch (err) {
+      expect(err.message)
+        .toBe('Invalid Input: dataId')
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
+
+  it('should only accept string dataIds', async () => {
+    const email = 'test@test.com'
+    const dataId = 1234
+    const data = {test: true}
+    try {
+      await update({email, dataId, data}, {})
+    } catch (err) {
+      expect(err.message)
+        .toBe('Invalid Input: dataId')
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
 })
