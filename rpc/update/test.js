@@ -25,4 +25,28 @@ describe('rpc/update', () => {
         updated: true
       })
   })
+
+  it('should throw an error if email is missing', async () => {
+    try {
+      await update({}, {})
+    } catch (err) {
+      expect(err.message)
+        .toBe('Missing Input Parameter')
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
+
+  it('should throw an error if email is invalid', async () => {
+    const email = 'email'
+    try {
+      await update({email}, {})
+      throw new Error('This Should Fail')
+    } catch (err) {
+      expect(err.message)
+        .toBe('Invalid Input: email')
+      expect(err.handled)
+        .toBe(true)
+    }
+  })
 })
