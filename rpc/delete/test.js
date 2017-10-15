@@ -15,7 +15,9 @@ describe('rpc/delete', () => {
         email
       })
     expect(result)
-      .toEqual(true)
+      .toEqual({
+        deleted: true
+      })
   })
 
   it('should throw an error if email is missing', async () => {
@@ -56,6 +58,8 @@ describe('rpc/delete', () => {
         email
       })
     expect(result)
-      .toEqual(false)
+      .toEqual({
+        deleted: false
+      })
   })
 })

@@ -12,10 +12,14 @@ module.exports = async ({
   if (!validate(email)) {
     throw createError({message: 'Invalid Input: email'})
   }
-  const result = await db.deleteOne({
+  const result = await db.updateOne({
     email
+  }, {
+    $set: {
+      verified: true
+    }
   })
   return {
-    deleted: result.deletedCount > 0
+    verified: result.matchedCount > 0
   }
 }
